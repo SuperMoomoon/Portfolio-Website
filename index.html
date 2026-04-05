@@ -1,0 +1,544 @@
+ <!DOCTYPE html>
+ <html lang="en">
+
+ 	<head>
+ 		<meta charset="UTF-8">
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 		<title>Summer - Product Designer</title>
+ 		<link rel="icon" type="image/icon" href="assets/icon/logo.png">
+ 		<script src="https://cdn.tailwindcss.com"></script>
+ 		<!-- <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+ 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+ 			rel="stylesheet">
+ 		<link rel="stylesheet" href="css/animate.css">
+		<link rel="stylesheet" href="css/style.css">
+ 		<link rel="stylesheet" href="css/new_style.css">
+		
+ 		<script>
+ 			tailwind.config = {
+ 				theme: {
+ 					extend: { 
+ 						colors: {
+ 							primary: '#2D7FF9',
+ 							secondary: '#16213E',
+ 							accent: '#FFC857',
+ 							dark: '#0F3460',
+ 							light: '#F5F5F5',
+ 						},
+ 						fontFamily: {
+ 							inter: ['Inter', 'sans-serif'],
+ 						},
+ 					}
+ 				}
+ 			}
+ 		</script>
+ 		<style>
+ 			body {
+ 				font-family: 'Inter', sans-serif;
+ 				overflow-x: hidden;
+ 				background-color: #ffffff;
+ 				color: #000000;
+ 			}
+
+ 			/* 滚动动画相关样式 */
+ 			.scrolling-in-progress {
+ 				cursor: pointer;
+ 				/* 滚动过程中改变鼠标指针 */
+ 				user-select: none;
+ 				/* 防止滚动时选中文本 */
+ 			}
+
+ 			/* 目标元素进入动画 */
+ 			.animate-fade-in {
+ 				animation: fadeInScale 0.5s ease-out forwards;
+ 			}
+
+ 			@keyframes fadeInScale {
+ 				from {
+ 					opacity: 0.8;
+ 					transform: translateY(20px) scale(0.98);
+ 				}
+
+ 				to {
+ 					opacity: 1;
+ 					transform: translateY(0) scale(1);
+ 				}
+ 			}
+
+ 			/* 滚动目标元素的准备状态 */
+ 			.scroll-target {
+ 				position: relative;
+ 			}
+
+ 			/* Animated Background */
+ 			.animated-bg {
+ 				position: fixed;
+ 				top: 0;
+ 				left: 0;
+ 				width: 100vw;
+ 				height: 100vh;
+ 				z-index: -1;
+ 				/* 完全移除所有可能导致动画的属性 */
+ 				display: block;
+ 				overflow: hidden;
+ 				pointer-events: none;
+ 				/* 禁用所有动画和过渡 */
+ 				animation: none !important;
+ 				transition: none !important;
+ 				/* 更强的硬件加速和性能优化 */
+ 				transform: translate3d(0, 0, 0);
+ 				-webkit-transform: translate3d(0, 0, 0);
+ 				will-change: transform;
+ 				contain: layout paint size;
+ 				/* 减少渲染负担 */
+ 				image-rendering: optimizeQuality;
+ 				-webkit-font-smoothing: antialiased;
+ 				-moz-osx-font-smoothing: grayscale;
+ 			}
+
+ 			/* 背景图片的额外优化 */
+ 			.animated-bg img {
+ 				position: absolute;
+ 				top: 0;
+ 				left: 0;
+ 				width: 100%;
+ 				height: 100%;
+ 				object-fit: cover;
+ 				/* 确保图片稳定渲染 */
+ 				animation: none !important;
+ 				transition: none !important;
+ 				transform: translateZ(0);
+ 			}
+
+ 			/* Work section with white background */
+ 			#work {
+ 				background-color: transparent;
+ 				position: relative;
+ 				z-index: 1;
+ 			}
+
+ 			/* Scroll Animation Container */
+ 			.scroll-animation-container {
+ 				position: relative;
+ 				overflow: hidden;
+ 			}
+
+ 			/* Navigation */
+ 			.nav-link {
+ 				font-size: 13px;
+ 				letter-spacing: 0.06em;
+ 				font-weight: 400;
+ 				transition: color 0.2s ease;
+ 			}
+
+ 			.nav-link:hover {
+ 				color: #666666;
+ 			}
+
+ 			/* Typography */
+ 			h1 {
+ 				line-height: 1.1;
+ 				font-weight: 700;
+ 			}
+
+ 			h2 {
+ 				font-weight: 700;
+ 			}
+
+ 			h3 {
+ 				font-weight: 700;
+ 			}
+
+ 			/* Project Cards */
+ 			.project-card {
+ 				border-radius: 12px;
+ 				overflow: hidden;
+ 				transition: transform 0.3s ease, box-shadow 0.3s ease;
+ 			}
+
+ 			.project-card:hover {
+ 				transform: translateY(-2px);
+ 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+ 			}
+
+ 			/* View Case Button */
+ 			.view-case-btn {
+ 				font-size: 14px;
+ 				font-weight: 500;
+ 				transition: all 0.2s ease;
+ 			}
+
+ 			.view-case-btn:hover {
+ 				opacity: 0.8;
+ 				transform: translateX(3px);
+ 			}
+
+ 			/* Profile Image */
+ 			.profile-img {
+ 				border: 3px solid white;
+ 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+ 			}
+
+ 			/* Spacing and Layout */
+ 			.container {
+ 				width: 100%;
+ 				max-width: 1240px;
+ 				margin-left: auto;
+ 				margin-right: auto;
+ 			}
+
+ 			/* Media query for screens wider than 1440px */
+ 			@media (min-width: 1441px) {
+ 				.container {
+ 					width: 1240px !important;
+ 					max-width: 1240px !important;
+ 					margin-left: auto !important;
+ 					margin-right: auto !important;
+ 				}
+ 			}
+
+ 			/* Images */
+ 			img {
+ 				transition: transform 0.5s ease;
+ 			}
+
+ 			/* .project-card:hover img {
+ 				transform: scale(1.02);
+ 			} */
+ 		</style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2PRNPB4JDV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2PRNPB4JDV');
+</script>
+
+ 	</head>
+
+
+
+ 	<body>
+ 		<!-- Animated Background -->
+ 		<div class="animated-bg">
+ 			<img src="assets/icon/background.png" alt="Background" class="w-full h-full object-cover">
+ 		</div>
+
+
+
+ 		<!-- Navigation -->
+ 		<div class="header">
+ 			<input type="checkbox" id="nav_check" hidden>
+ 			<nav class="new_head show">
+ 				<div class="nav1">
+ 					<a class="pc" href="index.html" style="display: flex; align-items: center;">
+ 						<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+ 					</a>
+ 					<div class="nav_ul">
+ 						<a href="index.html" id="nav-home" style="color: #E87D60;">Home</a>
+ 						<a href="work.html">Work</a>
+ 						<a href="about.html">About</a>
+ 						<a href="mailto:summeryueman@gmail.com">Contact</a>
+ 					</div>
+ 				</div>
+ 			</nav>
+ 			<label for="nav_check" class="hamburger">
+ 				<div></div>
+ 				<div></div>
+ 				<div></div>
+ 			</label>
+ 			<div class="sj">
+ 				<a href="index.html" style="display: flex; align-items: center;">
+ 					<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+ 				</a>
+ 			</div>
+ 		</div>
+
+ 		<!-- Hero Section -->
+ 		<section class="min-h-screen pt-48 pb-40 px-8 md:px-20 flex flex-col justify-center about nindex">
+ 			<div class="container mx-auto">
+ 				<div class="max-w-none pl-4 md:pl-8">
+ 					<h1 class="text-5xl md:text-7xl font-bold leading-tight mb-10">
+ 						<span class="bg-gradient-to-r from-[#B0ABAB] to-[#3D3D3D] text-transparent bg-clip-text">From
+ 							complexity</span><br>
+ 						to clarity.
+ 					</h1>
+ 					<p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+ 						Transforming intricate systems into intuitive,<br>
+ 						human-centered experiences.
+ 					</p>
+ 				</div>
+ 			</div>
+ 		</section>
+
+ 		<!-- About Section -->
+ 		<section id="about" class="min-h-screen py-40 px-8 md:px-20 about nindex1">
+ 			<div class="container mx-auto">
+ 				<div class="flex flex-col md:flex-row items-center gap-16 max-w-none mx-auto">
+ 					<div class="w-[12rem] h-[12rem] rounded-full overflow-hidden profile-img flex-shrink-0">
+ 						<img src="assets/icon/head.png" alt="Summer Profile" class="w-full h-full object-cover">
+ 					</div>
+ 					<div class="text-left">
+ 						<!--
+ 						<div class="text_1">ABOUT ME</div>
+ 						-->
+ 						<h2 class="text-[6rem] font-bold mb-6">I'm Summer
+ 						</h2>
+						<p class="p1">“A product designer design for clarity at scale. ”</p>
+ 						<p class="text-[2rem] text-gray-700 leading-relaxed">
+ 							I turn complex, cross-device problems into elegant, shippable experience. My approach blends rigorous data analysis with empathetic visual storytelling to bridge the gap between business goals and human needs.
+ 						</p> 
+ 						<div class="index_text">
+ 							<div class="index_text_1">
+ 								<span>6+</span>
+ 								<span>Years Exp.</span>
+ 							</div>
+ 							<div class="index_text_1">
+ 								<span>0-1</span>
+ 								<span>Product visions</span>
+ 							</div>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</section>
+		
+ 		<!-- Projects Section -->
+ 		<section id="work" class="py-5 px-8 md:px-20 index_ul">
+ 			<div class="container mx-auto">
+				<div class="index_footer wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1"
+						data-wow-duration="1.5s" data-wow-offset="150">
+					<div class="index_footer_1">Selected Works</div>
+					<div class="index_footer_2">
+						<span>Curated Solutions.</span>
+						<span class="span2">A glimpse into the systems I've built for global
+leaders and emerging tech pioneers.</span>
+					</div>
+				</div>
+ 				<div class="space-y-16 max-w-none mx-auto">
+					<div class="w-full more_ul max-w-[1240px] mx-auto mb-12 wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1"
+						data-wow-duration="1.5s" data-wow-offset="150">
+						<div class="project-card bg-[#F6F7FC] rounded-xl overflow-hidden shadow-sm h-[450px]">
+							<div class="flex flex-col md:flex-row h-full">								
+								<div class="w50 p-8 text-black flex flex-col h-full">
+									<div class="footer_icon"><span>Gen-AI</span><span>Music</span><span>AI workflow strategy</span></div>
+									<h3>
+										Building user-trusted Gen-AI <br>music platform</h3>
+									<div class="space-y-6">
+										<div 
+											style="font-weight: 400; font-style: Regular; font-size: 1; line-height: 180%; letter-spacing: 0%;">
+											<div class="flex items-center gap-2 text-black">
+												<span>Lead Designer • 2025</span>
+											</div>
+					
+										</div>
+									</div>
+									<div class="flex justify-end footer_more">
+										<a href="index_login.html?type=5"
+											class="view-case-btn inline-flex items-center justify-center text-white font-medium h-[48px] w-[147px] rounded-[30px]">
+											View Case Study <img src="echoflow_page/Container.png" />
+										</a>
+									</div>
+								</div>
+								<div class="w50 more_imgs" style="background-color: #E4E6EF;">
+									<img src="echoflow_page/EchoFlow-Preview.png" alt="Community Project" class="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-full more_ul max-w-[1240px] mx-auto mb-12 wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1"
+						data-wow-duration="1.5s" data-wow-offset="150">
+						<div class="project-card bg-[#F6F7FC] rounded-xl overflow-hidden shadow-sm h-[450px]">
+							<div class="flex flex-col md:flex-row h-full">
+								<div class="w50 more_imgs" style="background-color: #141413;">
+									<img src="echoflow_page/MC-Preview.png" alt="Community Project" class="">
+								</div>
+								<div class="w50 p-8 text-black flex flex-col h-full">
+									<div class="footer_icon"><span>Fintech</span><span>B2B</span><span>Scale</span></div>
+									<h3>
+										Designing seamless collaboration 
+                                        for global partners of Mastercard</h3>
+									<div class="space-y-6">
+										<div
+											style="font-weight: 400; font-style: Regular; font-size: 1; line-height: 180%; letter-spacing: 0%;">
+											<div class="flex items-center gap-2 text-black">
+												<span>Senior UX/UI Designer • 2023</span>
+											</div>
+					
+										</div>
+									</div>
+									<div class="flex justify-end footer_more">
+										<a href="index_login.html?type=1"
+											class="view-case-btn inline-flex items-center justify-center text-white font-medium h-[48px] w-[147px] rounded-[30px]">
+											View Case Study <img src="echoflow_page/Container.png" />
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="index_more_view"><a href="work.html">View More Case Studies</a></div>
+ 				</div>
+ 			</div>
+ 		</section>
+
+ 		<!-- footer s-->
+ 		<footer id="contact" class="h-[196px] px-8 md:px-20 bg-[#f6f7fc] flex items-center footer_t">
+ 			<div class=" mx-auto w-full footer">
+ 				<div class="flex flex-col md:flex-row justify-between items-center">
+ 					<div class="flex flex-col items-center md:items-start">
+ 						<img src="assets/icon/logo.png" alt="Logo" class="w-[69px] h-[69px] mb-4" />
+ 						<div class="text-[20px] text-[#3d3d3d]">© 2026 All rights reserved.</div>
+ 					</div>
+ 					<div class="flex footer_1 flex-col items-center md:items-end mt-8 md:mt-0">
+ 						<h2 class="text-[40px] font-medium text-black mb-4">Let's connect!</h2>
+ 						<div class="flex gap-4">
+ 							<a href="https://www.linkedin.com/in/summer-man/"
+ 								class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+ 								<img src="icon/footer-linkedin.png" />
+ 							</a>
+ 							<a href="mailto:summeryueman@gmail.com"
+ 								class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+ 								<img src="icon/footer-email.png" />
+ 							</a>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</footer>
+ 		<!-- footer e-->
+ 		<script type="text/javascript" src="js/jquery.min.js"></script>
+ 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 		<script src="js/wow.min.js" type="text/javascript"></script>
+		<script src="js/js.js" type="text/javascript"></script>
+ 		<script>
+ 			// Smooth scrolling for navigation links
+ 			// 初始化导航样式切换功能
+ 			function initNavStyleToggle() {
+ 				const homeNav = document.getElementById('nav-home');
+ 				const workNav = document.getElementById('nav-work');
+ 				const workSection = document.querySelector('#work');
+
+ 				if (!homeNav || !workNav || !workSection) return;
+
+ 				// 滚动监听函数
+ 				function handleScroll() {
+ 					const scrollPosition = window.scrollY + 150; // 添加偏移量
+ 					const workSectionTop = workSection.offsetTop;
+ 					const workSectionBottom = workSectionTop + workSection.offsetHeight;
+
+ 					// 判断是否在work区域
+ 					if (scrollPosition >= workSectionTop && scrollPosition < workSectionBottom) {
+ 						// 在work区域：work变橙色，home变黑色
+ 						homeNav.style.color = '#000000';
+ 						workNav.style.color = '#E87D60';
+ 					} else {
+ 						// 不在work区域：home变橙色，work变黑色
+ 						homeNav.style.color = '#E87D60';
+ 						workNav.style.color = '#000000';
+ 					}
+ 				}
+
+ 				// 为Work导航链接添加点击事件（确保颜色切换）
+ 				workNav.addEventListener('click', function() {
+ 					setTimeout(() => {
+ 						handleScroll(); // 确保点击后立即更新样式
+ 					}, 100);
+ 				});
+
+ 				// 为Home导航链接添加点击事件（回到顶部时切换颜色）
+ 				homeNav.addEventListener('click', function(e) {
+ 					e.preventDefault();
+ 					window.scrollTo({
+ 						top: 0,
+ 						behavior: 'smooth'
+ 					});
+ 					setTimeout(() => {
+ 						homeNav.style.color = '#E87D60';
+ 						workNav.style.color = '#000000';
+ 					}, 100);
+ 				});
+
+ 				// 添加滚动监听
+ 				window.addEventListener('scroll', handleScroll);
+
+ 				// 初始化时执行一次
+ 				handleScroll();
+ 			}
+
+ 			function scrollToWork() {
+ 				const workSection = document.querySelector('#work');
+ 				if (workSection) {
+ 					// 增强的平滑滚动 - 可控制时间，避免闪烁
+ 					const startPosition = window.pageYOffset;
+ 					const targetPosition = workSection.offsetTop - 120;
+ 					const distance = targetPosition - startPosition;
+ 					const duration = 1200; // 设置滚动时间为1.2秒
+ 					let start = null;
+
+ 					// 优化的缓动函数，使开始和结束更加平滑
+ 					function easeInOutCubic(t) {
+ 						return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 5;
+ 					}
+
+ 					// 使用requestAnimationFrame实现自定义滚动动画
+ 					function step(timestamp) {
+ 						if (!start) start = timestamp;
+ 						const progress = Math.min((timestamp - start) / duration, 1);
+
+ 						// 使用更平滑的缓动函数 
+ 						const currentPosition = startPosition + distance * easeInOutCubic(progress);
+
+ 						// 直接滚动，避免中间状态的闪烁 
+ 						window.scrollTo(0, currentPosition);
+
+ 						if (progress < 1) {
+ 							window.requestAnimationFrame(step);
+ 						} else {
+ 							// 滚动完成后直接设置到精确位置，确保没有偏移  
+ 							window.scrollTo(0, targetPosition);
+ 						}
+ 					}
+
+ 					window.requestAnimationFrame(step);
+ 				}
+ 			}
+
+ 			// DOM加载完成后初始化
+ 			document.addEventListener('DOMContentLoaded', function() {
+ 				initNavStyleToggle();
+ 			});
+
+ 			// Scroll animation to zoom background (start zoomed in, then zoom out)
+ 			const animatedBg = document.querySelector('.animated-bg');
+ 			const aboutSection = document.querySelector('#about');
+ 
+ 			// Scroll Animation - scale from small to large
+ 			window.addEventListener('scroll', function() {
+ 				const animatedBg = document.querySelector('.animated-bg');
+ 				const scrollPosition = window.scrollY;
+ 				// Get about section bottom position 
+ 				const aboutSectionBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
+ 				// Calculate max scroll as about section bottom - window height
+ 				const maxScroll = Math.max(aboutSectionBottom - window.innerHeight,
+ 				1500); // Minimum 500px for better experience
+				
+ 				// Calculate scale based on scroll position (from 1 to 1.7)
+ 				const scrollProgress = Math.min(scrollPosition / maxScroll, 1);
+ 				const scale = 1 + (scrollProgress * 0.7);
+
+ 				// Apply only scale transform 
+ 				animatedBg.style.transform = `scale(${scale})`;
+				animatedBg.style.opacity = 1.4-`${scrollProgress}`;
+ 			});
+
+ 			// Set initial state directly (normal scale)
+ 			document.querySelector('.animated-bg').style.transform = 'scale(1)';
+ 		</script>
+ 	</body>
+
+ </html>

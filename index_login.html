@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer - Product Designer</title>
+  <link rel="icon" type="image/icon" href="assets/icon/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/new_style.css">
+  <style>
+    html,
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #000000;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    h3 {
+      font-weight: 700;
+    }
+
+    /* Spacing and Layout */
+    .content {
+      width: 100%;
+      /* min-height: 100vh; */
+      height: calc(100vh - 196px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      box-sizing: border-box;
+    }
+  </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2PRNPB4JDV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2PRNPB4JDV');
+</script>
+
+</head>
+
+
+<body>
+    
+     <!-- Navigation -->
+     <div class="header">
+     	 <input type="checkbox" id="nav_check" hidden>
+     		<nav class="new_head show">
+     			<div class="nav1">
+     				<a class="pc" href="index.html" style="display: flex; align-items: center;">
+     					<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+     				</a>
+     				<div class="nav_ul" >
+     					<a href="index.html" id="nav-home">Home</a>
+     					<a href="index.html#work" id="nav-work" >Work</a>
+     					<a href="about.html" >About</a>
+     					<a href="mailto:summeryueman@gmail.com">Contact</a>
+     				</div>
+     			 </div>
+     		</nav>
+     		<label for="nav_check" class="hamburger">
+     			<div></div>
+     			<div></div>
+     			<div></div>
+     		</label>
+     		<div class="sj">
+     			<a href="index.html" style="display: flex; align-items: center;">
+     				<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+     			</a>
+     		</div>
+        </div>
+
+  <!-- 密码输入框 -->
+  <div class="content bg-[#f6f7fc] pt-[150px]">
+    <div class="flex flex-col items-center justify-center gap-8 w-full max-w-md px-4">
+      <!-- 第一行：图片 -->
+      <div class="flex justify-center">
+        <img src="assets/icon_login/icon001.png" style="width: 554px;">
+      </div>
+
+      <!-- 第二行：提示文本 -->
+      <div class="text-center text-[24px] text-[#666666]">
+        Please enter password to view.
+      </div>
+
+      <!-- 第三行：密码输入框和提交按钮 -->
+      <div class="w-full max-w-[320px] relative">
+        <div class="relative">
+          <input type="password" id="password" name="password"
+              class="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-[#E87D60] transition-colors shadow-md"
+              placeholder="Enter Password" required>
+
+          <!-- 提交按钮 -->
+          <button type="button" onclick="validatePassword()" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full flex items-center justify-center">
+            <img src="assets/icon_login/Right Arrow.png" alt="Right Arrow" style="height: 24px; width: 24px;">
+          </button>
+        </div>
+
+        <!-- 错误消息 -->
+        <p id="error-message" class="mt-4 text-center text-red-500 hidden">Incorrect password. Please try again.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- footer s-->
+		<footer id="contact" class="h-[196px] px-8 md:px-20 bg-[#f6f7fc] flex items-center footer_t" style="margin-top: 0;">
+			<div class=" mx-auto w-full footer">
+				<div class="flex flex-col md:flex-row justify-between items-center">
+					<div class="flex flex-col items-center md:items-start">
+						<img src="assets/icon/logo.png" alt="Logo" class="w-[69px] h-[69px] mb-4" />
+						<div class="text-[20px] text-[#3d3d3d]">© 2025 All rights reserved.</div>
+					</div>
+					<div class="flex footer_1 flex-col items-center md:items-end mt-8 md:mt-0">
+						<h2 class="text-[40px] font-medium text-black mb-4">Let's connect!</h2>
+						<div class="flex gap-4">
+							<a href="https://www.linkedin.com/in/summer-man/"
+								class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+								<img src="icon/footer-linkedin.png" />
+							</a>
+							<a href="mailto:summeryueman@gmail.com"
+								class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+								<img src="icon/footer-email.png" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- footer e-->
+
+  <script>
+    // 页面加载时检查是否已登录
+    window.addEventListener('DOMContentLoaded', function() {
+      // 检查sessionStorage中是否有登录状态
+      if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        // 如果已登录，直接根据type参数跳转
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeParam = urlParams.get('type');
+        
+        if (typeParam == 1) {
+          window.location.href = 'connect.html';
+        } else if (typeParam == 2) {
+          window.location.href = 'sweet.html';
+        } else if (typeParam == 3) {
+          window.location.href = 'yifang.html';
+        } else if (typeParam == 4) {
+          window.location.href = 'morpheus.html';
+        } else if (typeParam == 5) {
+          window.location.href = 'echoflow.html';
+        } else {
+          window.location.href = 'index.html';
+        }
+      }
+      
+      // 为密码输入框添加回车键事件监听
+      const passwordInput = document.getElementById('password');
+      passwordInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          validatePassword();
+        }
+      });
+    });
+
+    // 密码验证功能
+    function validatePassword() {
+      // 设置正确的密码为8888
+      const correctPassword = '8888';
+      const enteredPassword = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      if (enteredPassword === correctPassword) {
+        // 密码正确，设置登录状态到sessionStorage
+        sessionStorage.setItem('isLoggedIn', 'true');
+        
+        // 根据URL参数type决定跳转目标
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeParam = urlParams.get('type');
+
+        if (typeParam == 1) {
+          // 当type==1时跳转到connect.html
+          window.location.href = 'connect.html';
+        }else if (typeParam == 2) {
+          // 当type==2时跳转到sweet.html
+          window.location.href = 'sweet.html';
+        }else if (typeParam == 3) {
+          // 当type==3时跳转到yifang.html
+          window.location.href = 'yifang.html';
+        }else if (typeParam == 4) {
+          // 当type==4时跳转到morpheus.html
+          window.location.href = 'morpheus.html';
+        }else if (typeParam == 5) {
+          // 当type==4时跳转到morpheus.html
+          window.location.href = 'echoflow.html';
+        } else {
+          // 其他情况跳转到首页
+          window.location.href = 'index.html';
+        }
+      } else {
+        // 密码错误，显示错误消息
+        errorMessage.classList.remove('hidden');
+        // 3秒后隐藏错误消息
+        setTimeout(() => {
+          errorMessage.classList.add('hidden');
+        }, 3000);
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer - Product Designer</title>
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="icon" type="image/icon" href="assets/icon/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 	<link rel="stylesheet" href="css/new_style.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    h1 {
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    h3 {
+      font-weight: 700;
+    }
+
+    /* Spacing and Layout */
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Media query for screens wider than 1440px */
+    @media (min-width: 1441px) {
+      .container {
+        width: 960px !important;
+        max-width: 960px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    }
+  </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2PRNPB4JDV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2PRNPB4JDV');
+</script>
+  
+</head>
+
+
+
+<body>
+<!-- Navigation -->
+  <div class="header">
+  	 <input type="checkbox" id="nav_check" hidden>
+  		<nav class="new_head">
+  			<div class="nav1">
+  				<a class="pc" href="index.html" style="display: flex; align-items: center;">
+  					<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+  				</a>
+  				<div class="nav_ul" >
+  					<a href="index.html">Home</a>
+  					<a href="work.html" >Work</a>
+  					<a href="about.html" style="color: #E87D60;">About</a>
+  					<a href="mailto:summeryueman@gmail.com">Contact</a>
+  				</div>
+  			 </div>
+  		</nav>
+  		<label for="nav_check" class="hamburger">
+  			<div></div>
+  			<div></div>
+  			<div></div>
+  		</label>
+  		<div class="sj">
+  			<a href="index.html" style="display: flex; align-items: center;">
+  				<img src="assets/icon/logo.png" style="height: 40px; width: 40px;">
+  			</a>
+  		</div>
+     </div>
+	<div style="height: 1px;"></div>
+	<!-- About Section -->
+	<section id="about" class=" about about_box nindex1">
+		<div class="container mx-auto">
+			<div class="flex flex-col md:flex-row items-center gap-16 max-w-none mx-auto">
+				<div class="w-[12rem] h-[12rem] rounded-full overflow-hidden profile-img flex-shrink-0">
+					<img src="assets/icon/head.png" alt="Summer Profile" class="w-full h-full object-cover">
+				</div>
+				<div class="text-left">
+					<div class="text_1">ABOUT ME</div>
+					
+          <h3 class="text-[3rem] font-bold mb-6 leading-[1.2]">I'm Summer,a<br/>Product Designer
+					</h3>
+          <p >With over eight years of experience in digital curation and interface architecture, I bridge the gap between human intuition and technical capability. Currently shaping future-focused products that prioritize intention over noise.
+          </p>
+      
+					
+					<div class="index_text">
+						<div class="index_text_1">
+							<span>6+</span>
+							<span>Years Exp.</span>
+						</div>
+						<div class="index_text_1">
+							<span>0-1</span>
+							<span>Product visions</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+  <!-- 显示内容 -->
+  <div class="container pt-10 pb-10 about about_text1">
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold mt-12 mb-6 wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1" data-wow-duration="1.5s"
+			data-wow-offset="150" style="display: flex;">
+        <span>My design principles </span>
+      </h2>
+	  <div class="about_text wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1" data-wow-duration="1.5s"
+			data-wow-offset="150">The core philosophies that guide my creative process and decision-making on every project.</div>
+      <div class="space-y-8 about_ul">
+        <!-- Principle 1 -->
+        <div class="bg-[#F6F7FC] p-8 rounded-xl shadow-sm wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1" data-wow-duration="1.5s"
+			data-wow-offset="150">
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="w-[100px] h-[100px] flex-shrink-0">
+              <img src="assets/icon_about/icon001.png" alt="Design System" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-3">If it doesn't scale, it's not done</h3>
+              <p class="p2">My priority is architecting interfaces using robust design systems. This
+                guarantees developer velocity and ensures that a user interacting with the product on a desktop receives
+                the exact same quality, cognitive experience as they do on a mobile device.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Principle 2 -->
+        <div class="bg-[#F6F7FC] p-8 rounded-xl shadow-sm wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1" data-wow-duration="1.5s"
+			data-wow-offset="150">
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="w-[100px] h-[100px] flex-shrink-0">
+              <img src="assets/icon_about/icon002.png" alt="Action" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-3">Aesthetics are secondary to action</h3>
+              <p class="p2">My design process begins and ends with the data. I use A/B testing, user journey
+                mapping, and a deep understanding of behavioral economics to identify high-leverage friction points,
+                resulting in verifiable business growth.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Principle 3 -->
+        <div class="bg-[#F6F7FC] p-8 rounded-xl shadow-sm wow fadeInUp" data-wow-delay="0s" data-wow-iteration="1" data-wow-duration="1.5s"
+			data-wow-offset="150">
+          <div class="flex flex-col md:flex-row gap-8 items-start">
+            <div class="w-[100px] h-[100px] flex-shrink-0">
+              <img src="assets/icon_about/icon003.png" alt="Disappearing Design" class="w-full h-full object-contain">
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-3">Design should disappear</h3>
+              <p class="p2">The best interaction is the one the user doesn't notice. I focus intensely on
+                micro-interactions and intuitive workflows to reduce mental friction. Whether shaping a future
+                voice-enabled system or simplifying a checkout flow, my design goal is to guide the user with such
+                precision that the product feels effortless and instantly familiar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- footer s-->
+ <footer id="contact" class="h-[196px] px-8 md:px-20 bg-[#f6f7fc] flex items-center footer_t">
+ 	<div class=" mx-auto w-full footer">
+ 		<div class="flex flex-col md:flex-row justify-between items-center">
+ 			<div class="flex flex-col items-center md:items-start">
+ 				<img src="assets/icon/logo.png" alt="Logo" class="w-[69px] h-[69px] mb-4" />
+ 				<div class="text-[20px] text-[#3d3d3d]">© 2025 All rights reserved.</div>
+ 			</div>
+ 			<div class="flex footer_1 flex-col items-center md:items-end mt-8 md:mt-0">
+ 				<h2 class="text-[40px] font-medium text-black mb-4">Let's connect!</h2>
+ 				<div class="flex gap-4">
+ 					<a href="https://www.linkedin.com/in/summer-man/"
+ 						class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+ 						<img src="icon/footer-linkedin.png" />
+ 					</a>
+ 					<a href="mailto:summeryueman@gmail.com"
+ 						class="w-[40px] h-[40px] flex items-center justify-center text-lg">
+ 						<img src="icon/footer-email.png" />
+ 					</a>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </footer>
+ <!-- footer e-->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="js/wow.min.js" type="text/javascript"></script>
+		<script src="js/js.js" type="text/javascript"></script>
+
+</body> 
+
+</html>
