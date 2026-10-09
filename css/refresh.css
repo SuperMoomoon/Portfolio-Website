@@ -326,3 +326,7 @@ body:not(.echoflow) .index_more_view a:hover { background: var(--ink) !important
 @media (prefers-reduced-motion: reduce) {
 	.echoflow .ef-tape img { animation: none; }
 }
+
+/* Top nav: Bootstrap (loaded on this page only) draws a focus box on every mouse click.
+   Other pages don't load it, so hide that here to keep the nav the same. Keyboard focus still shows a ring. */
+.header a:focus:not(:focus-visible) { outline: none; }
