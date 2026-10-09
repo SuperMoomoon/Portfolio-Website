@@ -562,12 +562,19 @@ leaders and emerging tech pioneers.</span>
 			const orbEls = Array.from(document.querySelectorAll('.animated-bg .orb')).map(function(el) {
 				return { el: el, z: parseFloat(getComputedStyle(el).getPropertyValue('--z')) || 2, cx: 0, cy: 0 };
 			});
-			const CAMERA_TRAVEL = 0.7; // how far the camera flies over the full scroll
+			// How far the camera flies over the full scroll: full on desktop, shorter on narrow screens
+			// (orbs are closer to the edges there and would otherwise leave the view too early).
+			const CAMERA_TRAVEL_WIDE = 0.7;
+			const CAMERA_TRAVEL_NARROW = 0.4;
+			let cameraTravel = CAMERA_TRAVEL_WIDE;
 			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			let viewW = 0, viewH = 0;
 			function measureOrbs() {
 				viewW = window.innerWidth;
 				viewH = window.innerHeight;
+				// phones (600px and under) use the narrow value, desktop (1000px and up) the wide one, blended in between
+				const wide = Math.min(Math.max((viewW - 600) / 400, 0), 1);
+				cameraTravel = CAMERA_TRAVEL_NARROW + (CAMERA_TRAVEL_WIDE - CAMERA_TRAVEL_NARROW) * wide;
 				orbEls.forEach(function(o) {
 					// offsetLeft/Top ignore transforms, so these are the orb centres at rest
 					o.cx = o.el.offsetLeft + o.el.offsetWidth / 2 - viewW / 2;
@@ -575,7 +582,7 @@ leaders and emerging tech pioneers.</span>
 				});
 			}
 			function renderBackground(progress) {
-				const c = progress * CAMERA_TRAVEL;
+				const c = progress * cameraTravel;
 				orbEls.forEach(function(o) {
 					const s = o.z / (o.z - c);
 					o.el.style.transform = 'translate3d(' + (o.cx * (s - 1)).toFixed(1) + 'px,' + (o.cy * (s - 1)).toFixed(1) + 'px,0) scale(' + s.toFixed(3) + ')';
