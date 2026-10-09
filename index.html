@@ -96,19 +96,53 @@
  				-moz-osx-font-smoothing: grayscale;
  			}
 
- 			/* 背景图片的额外优化 */
- 			.animated-bg img {
- 				position: absolute;
- 				top: 0;
- 				left: 0;
- 				width: 100%;
- 				height: 100%;
- 				object-fit: cover;
- 				/* 确保图片稳定渲染 */
- 				animation: none !important;
- 				transition: none !important;
- 				transform: translateZ(0);
- 			}
+			/* Background orbs: soft floating balls. Scrolling flies a "camera" toward them:
+			   each orb has a depth (--z), and the script below moves and scales it with simple perspective,
+			   so near orbs rush outward past the edges while far ones barely move.
+			   Sizes use --u so the orbs scale with the viewport like the old image did. */
+			.animated-bg {
+				--u: max(1vw, 0.6vh);
+				--p: 0;
+			}
+			.animated-bg .orb {
+				position: absolute;
+				left: var(--x);
+				top: var(--y);
+				width: calc(var(--d) * var(--u));
+				aspect-ratio: 1;
+				margin: calc(var(--d) * var(--u) / -2) 0 0 calc(var(--d) * var(--u) / -2);
+				opacity: var(--o);
+				transform-origin: 50% 50%;
+				will-change: transform;
+			}
+			.animated-bg .orb-body {
+				display: block;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background: var(--bg);
+				animation: orb-float var(--t) ease-in-out var(--delay) infinite alternate !important;
+			}
+			@keyframes orb-float {
+				from { transform: translate3d(0, 0, 0); }
+				to   { transform: translate3d(calc(var(--fx) * var(--u)), calc(var(--fy) * var(--u)), 0); }
+			}
+			/* Glowing orbs: fade to nothing at the edge */
+			.orb-glow  { --bg: radial-gradient(circle, rgba(140, 148, 251, 0.62) 0%, rgba(140, 148, 251, 0.46) 20%, rgba(140, 148, 251, 0.27) 40%, rgba(140, 148, 251, 0.12) 60%, rgba(140, 148, 251, 0.04) 80%, rgba(140, 148, 251, 0) 100%); }
+			/* Sphere orbs: crisp edge, lit from the top, fading toward the bottom */
+			.orb-blue  { --bg: radial-gradient(circle at 50% 28%, #959afb 0%, #9a9efb 40%, rgba(154, 158, 251, 0.45) 75%, rgba(154, 158, 251, 0.14) 100%); }
+			.orb-amber { --bg: radial-gradient(circle at 30% 28%, #e8785f 0%, #ec9a45 38%, rgba(244, 176, 90, 0.38) 70%, rgba(244, 176, 90, 0.08) 92%, rgba(244, 176, 90, 0) 100%); }
+
+			.animated-bg .orb-1 { --x: 1.4%;  --y: 8%;    --d: 30; --o: .85; --z: 1.8;  --t: 13s; --delay: -2s; --fx: 2.2;  --fy: 1.6; }
+			.animated-bg .orb-2 { --x: 11.6%; --y: 34.6%; --d: 16; --o: 1;   --z: 1.15; --t: 9s;  --delay: -5s; --fx: 1.2;  --fy: -1.8; }
+			.animated-bg .orb-3 { --x: 94.6%; --y: 23.8%; --d: 28; --o: .95; --z: 1.0; --t: 15s; --delay: -8s; --fx: -1.6; --fy: 1.4; }
+			.animated-bg .orb-4 { --x: 70.7%; --y: 54%;   --d: 26; --o: .8;  --z: 2.2;  --t: 12s; --delay: -3s; --fx: -2;   --fy: -1.5; }
+			.animated-bg .orb-5 { --x: 23.6%; --y: 78.8%; --d: 22; --o: .7;  --z: 2.6;   --t: 11s; --delay: -6s; --fx: 1.8;  --fy: -1.2; }
+			.animated-bg .orb-6 { --x: 85.7%; --y: 73%;   --d: 12.5; --o: .9; --z: 1.35; --t: 8s;  --delay: -1s; --fx: -1.2; --fy: -1.6; }
+
+			@media (prefers-reduced-motion: reduce) {
+				.animated-bg .orb-body { animation: none !important; }
+			}
 
  			/* Work section with white background */
  			#work {
@@ -223,8 +257,13 @@
 
  	<body>
  		<!-- Animated Background -->
- 		<div class="animated-bg">
- 			<img src="assets/icon/background.png" alt="Background" class="w-full h-full object-cover">
+ 		<div class="animated-bg" aria-hidden="true">
+ 			<div class="orb orb-1"><span class="orb-body orb-glow"></span></div>
+			<div class="orb orb-2"><span class="orb-body orb-amber"></span></div>
+			<div class="orb orb-3"><span class="orb-body orb-blue"></span></div>
+			<div class="orb orb-4"><span class="orb-body orb-glow"></span></div>
+			<div class="orb orb-5"><span class="orb-body orb-glow"></span></div>
+			<div class="orb orb-6"><span class="orb-body orb-blue"></span></div>
  		</div>
 
 
@@ -517,27 +556,63 @@ leaders and emerging tech pioneers.</span>
  			const animatedBg = document.querySelector('.animated-bg');
  			const aboutSection = document.querySelector('#about');
  
- 			// Scroll Animation - scale from small to large
- 			window.addEventListener('scroll', function() {
- 				const animatedBg = document.querySelector('.animated-bg');
- 				const scrollPosition = window.scrollY;
- 				// Get about section bottom position 
- 				const aboutSectionBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
- 				// Calculate max scroll as about section bottom - window height
- 				const maxScroll = Math.max(aboutSectionBottom - window.innerHeight,
- 				1500); // Minimum 500px for better experience
-				
- 				// Calculate scale based on scroll position (from 1 to 1.7)
- 				const scrollProgress = Math.min(scrollPosition / maxScroll, 1);
- 				const scale = 1 + (scrollProgress * 0.7);
+ 			// Scroll animation: a camera flies toward the orbs.
+			// Each orb sits at depth z (smaller = nearer). Moving the camera forward by c gives a perspective
+			// scale of z / (z - c), applied to both the orb's size and its distance from the view centre.
+			const orbEls = Array.from(document.querySelectorAll('.animated-bg .orb')).map(function(el) {
+				return { el: el, z: parseFloat(getComputedStyle(el).getPropertyValue('--z')) || 2, cx: 0, cy: 0 };
+			});
+			const CAMERA_TRAVEL = 0.7; // how far the camera flies over the full scroll
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			let viewW = 0, viewH = 0;
+			function measureOrbs() {
+				viewW = window.innerWidth;
+				viewH = window.innerHeight;
+				orbEls.forEach(function(o) {
+					// offsetLeft/Top ignore transforms, so these are the orb centres at rest
+					o.cx = o.el.offsetLeft + o.el.offsetWidth / 2 - viewW / 2;
+					o.cy = o.el.offsetTop + o.el.offsetHeight / 2 - viewH / 2;
+				});
+			}
+			function renderBackground(progress) {
+				const c = progress * CAMERA_TRAVEL;
+				orbEls.forEach(function(o) {
+					const s = o.z / (o.z - c);
+					o.el.style.transform = 'translate3d(' + (o.cx * (s - 1)).toFixed(1) + 'px,' + (o.cy * (s - 1)).toFixed(1) + 'px,0) scale(' + s.toFixed(3) + ')';
+				});
+				animatedBg.style.opacity = 1.4 - progress;
+			}
 
- 				// Apply only scale transform 
- 				animatedBg.style.transform = `scale(${scale})`;
-				animatedBg.style.opacity = 1.4-`${scrollProgress}`;
- 			});
+			let bgTarget = 0, bgCurrent = 0, bgTicking = false;
+			function bgFrame() {
+				bgCurrent += (bgTarget - bgCurrent) * (reduceMotion ? 1 : 0.14); // a little inertia so the camera glides
+				if (Math.abs(bgTarget - bgCurrent) < 0.0005) bgCurrent = bgTarget;
+				renderBackground(bgCurrent);
+				if (bgCurrent !== bgTarget) {
+					requestAnimationFrame(bgFrame);
+				} else {
+					bgTicking = false;
+				}
+			}
+			function updateBackground() {
+				const scrollPosition = window.scrollY;
+				// Get about section bottom position
+				const aboutSectionBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
+				// Calculate max scroll as about section bottom - window height
+				const maxScroll = Math.max(aboutSectionBottom - window.innerHeight,
+				1500); // Minimum 1500px for better experience
+				bgTarget = Math.min(scrollPosition / maxScroll, 1);
+				if (!bgTicking) {
+					bgTicking = true;
+					requestAnimationFrame(bgFrame);
+				}
+			}
+			window.addEventListener('scroll', updateBackground, { passive: true });
+			window.addEventListener('resize', function() { measureOrbs(); updateBackground(); });
 
- 			// Set initial state directly (normal scale)
- 			document.querySelector('.animated-bg').style.transform = 'scale(1)';
+			// Set initial state (camera at rest)
+			measureOrbs();
+			updateBackground();
  		</script>
  	</body>
 
