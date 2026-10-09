@@ -330,3 +330,18 @@ body:not(.echoflow) .index_more_view a:hover { background: var(--ink) !important
 /* Top nav: Bootstrap (loaded on this page only) draws a focus box on every mouse click.
    Other pages don't load it, so hide that here to keep the nav the same. Keyboard focus still shows a ring. */
 .header a:focus:not(:focus-visible) { outline: none; }
+
+/* ---------- EchoFlow: mobile app screens ---------- */
+.echoflow .ef-mobile { padding-top: clamp(56px, 8vw, 104px); }
+.echoflow .ef-mobile .ef-h2 { margin-bottom: clamp(16px, 2.5vw, 24px); }
+.echoflow .ef-phones { list-style: none; padding: 0; margin: clamp(28px, 4vw, 44px) 0 0; display: flex; gap: clamp(12px, 2vw, 24px); }
+.echoflow .ef-phones li { flex: 1 1 0; min-width: 0; max-width: 210px; }
+.echoflow .ef-phones figure { margin: 0; }
+.echoflow .ef-phones img { display: block; width: 100%; height: auto; border-radius: 22px; border: 1px solid var(--line); background: #000; }
+.echoflow .ef-phones figcaption { font-size: 0.8rem; line-height: 1.4; color: var(--ink-3); margin-top: 0.6rem; }
+
+/* On small screens the row becomes swipeable, with the next screen peeking in */
+@media (max-width: 860px) {
+	.echoflow .ef-phones { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; margin-right: calc(-1 * clamp(20px, 5vw, 48px)); padding-right: clamp(20px, 5vw, 48px); }
+	.echoflow .ef-phones li { flex: 0 0 min(42%, 180px); scroll-snap-align: start; }
+}
