@@ -1,0 +1,155 @@
+/* Shared type system.
+   Taken from the EchoFlow case study (css/refresh.css) so the other pages read the same way.
+   Typography only: font, size, weight, spacing and neutral text colours.
+   Layout, images and brand accents (the indigo highlights) are left as they were.
+   Loaded last on Work, About, Connect, Sweet, Yifang and Morpheus. */
+
+:root {
+	--ink: #141414;
+	--ink-2: #4b4b4b;
+	--ink-3: #8a8a8a;
+	--line: #e5e7eb;
+	--sans: 'Inter', system-ui, sans-serif;
+}
+
+body {
+	font-family: var(--sans);
+	-webkit-font-smoothing: antialiased;
+}
+
+/* style.css has a stray `font-family: ''` that drops most text to the system font.
+   One family everywhere (the nav is left alone, as on EchoFlow). */
+body :is(p, span, a, li, dt, dd, div, strong, b, em, h1, h2, h3, h4, label, button, figcaption, input, textarea):not(.header, .header *) {
+	font-family: var(--sans);
+}
+
+body :is(h1, h2, h3, h4):not(footer *) { letter-spacing: -0.02em; }
+
+
+/* ---------- Eyebrow labels (EchoFlow .ef-label) ---------- */
+body .chat_overview_btt,
+body .index_footer_1,
+body .text_1,
+body h2.text-base {
+	font-size: 0.78rem !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	line-height: 1.4;
+}
+body .chat_overview_btt,
+body h2.text-base { color: var(--ink-3) !important; }
+
+/* ---------- Fact rows: Timeline / Type / Platform / My role (EchoFlow .ef-facts) ---------- */
+body .border_tb h3,
+body .chat_case h3.uppercase,
+body h3.uppercase {
+	font-size: 0.72rem !important;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	line-height: 1.4;
+	color: var(--ink-3) !important;
+}
+body :is(.border_tb, .grid-cols-4) p {
+	font-size: 1rem;
+	line-height: 1.5;
+	color: var(--ink);
+}
+
+
+/* ---------- Titles ---------- */
+/* Section titles (EchoFlow .ef-h2) */
+body .chat_overview_bt,
+body h2.text-3xl,
+body h3.text-3xl,
+body .about_text1 h2 {
+	font-size: clamp(1.8rem, 3.6vw, 2.6rem) !important;
+	font-weight: 700 !important;
+	line-height: 1.15 !important;
+	letter-spacing: -0.02em;
+	color: var(--ink) !important;
+}
+/* The first title on a case study (EchoFlow .ef-title) */
+body #overview .chat_overview_bt,
+body #overview p.text-3xl {
+	color: var(--ink) !important;
+	font-size: clamp(2.2rem, 5.5vw, 4.5rem) !important;
+	line-height: 1.1 !important;
+	letter-spacing: -0.03em;
+	max-width: 18ch;
+}
+/* Sub-titles inside a section (EchoFlow .ef-decision h3 / .ef-cards h3) */
+body .d2,
+body .chat_overview_btt1 {
+	font-size: clamp(1.3rem, 2vw, 1.6rem);
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+}
+
+
+/* ---------- Body copy (EchoFlow .ef-lede / .ef-dl dd) ---------- */
+body .p2,
+body .text_bt,
+body .d3,
+body .chat_case li,
+body p.text-xl,
+body .content .prose p.text-xl,
+body span.text-xl {
+	font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+	line-height: 1.6;
+	color: var(--ink-2);
+}
+body .chat_case b { color: var(--ink); }
+/* The "How might we" question (EchoFlow .ef-question) */
+body p.f_bt {
+	font-size: clamp(1.2rem, 2vw, 1.5rem);
+	font-weight: 700;
+	line-height: 1.35;
+	color: var(--ink);
+}
+
+
+/* ---------- Work page ---------- */
+body .work_footer .index_footer_2 > span:first-child {
+	font-size: clamp(2.2rem, 5vw, 3.6rem);
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+}
+body .work_footer .index_footer_2 span.span2 {
+	font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+	font-weight: 400;
+	line-height: 1.6;
+	color: var(--ink-2);
+}
+/* Project cards, and the "See more" teaser on the case-study pages */
+body .index_ul .more_ul .text-black h3,
+body .project-card h3 {
+	font-size: clamp(1.3rem, 2vw, 1.75rem) !important; /* beats an older `2rem !important` in new_style.css */
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+}
+body h2.mb-12 {
+	font-size: clamp(1.5rem, 2.6vw, 2rem);
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+
+/* ---------- About page ---------- */
+body .text-left > h3 {
+	font-size: clamp(2.2rem, 5vw, 3.6rem);
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+}
+body .text-left > p,
+body .about_text {
+	font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+	line-height: 1.6;
+	color: var(--ink-2);
+}
