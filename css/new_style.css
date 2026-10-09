@@ -554,6 +554,13 @@ section {
 	display: inline-block;
 	width: auto;
 } 
+/* Work page title: keep it on two lines between the phone and desktop layouts.
+   Its box is 50% wide, which is too narrow for "Selected Works" on mid-size screens and made it wrap to three lines. */
+@media (min-width: 769px) {
+	.work_footer .index_footer_2 > span:first-child{
+		min-width: 8.1em;
+	}
+}
 .index_more_view{
 	text-align: center; 
 	padding: 2% 0; 
